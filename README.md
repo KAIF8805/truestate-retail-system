@@ -1,62 +1,172 @@
 # Retail Sales Management System
 
-## 1. Overview
-Retail Sales Management System for TruEstate SDE Intern assignment.
-Supports full-text search, multi-select filters, sorting and pagination over a structured sales dataset.
-Frontend and backend are clearly separated with a clean, modular architecture.
+A full-stack Retail Sales Management System built as part of the TruEstate SDE Intern Assignment.  
+The system provides advanced Search, Filtering, Sorting, and Pagination features over structured sales data with a clean modular architecture.  
+Both backend and frontend are optimized for performance, maintainability, and real-world engineering practices.
 
-## 2. Tech Stack
-- Backend: Node.js, Express
-- Frontend: React (Vite)
-- Data: JSON dataset converted from provided CSV
+---
 
-## 3. Search Implementation Summary
-- Full-text search on Customer Name and Phone Number.
-- Case-insensitive includes match, implemented in salesService.applySearch.
-- Search composes with filters and sorting because it is part of a single processing pipeline.
+##  Tech Stack
 
-## 4. Filter Implementation Summary
-- Multi-select filters: Customer Region, Gender, Product Category, Tags, Payment Method.
-- Range filters: Age range, Date range.
-- All query params are normalized in buildQueryOptions and applied in salesService.applyFilters.
-- Filters work independently and in combination and preserve active search/sort state.
+### **Frontend**
+- React (Vite)
+- Axios
+- Custom hooks & services architecture
+- Netlify Deployment
 
-## 5. Sorting Implementation Summary
-- Sort options: Date (default, newest first), Quantity, Customer Name (A–Z).
-- Implemented in salesService.applySorting with stable comparison logic.
-- Sorting always runs after search and filters, so it respects the active result set.
+### **Backend**
+- Node.js + Express
+- CORS
+- Modular service + controller architecture
+- Render Deployment
 
-## 6. Pagination Implementation Summary
-- Page size fixed at 10 items.
-- Pagination handled server-side in salesService.applyPagination.
-- Response includes page, totalPages, totalItems, hasNextPage, hasPrevPage.
-- Frontend integrates with Next/Previous buttons while preserving search, filters and sorting.
+---
 
-## 7. Setup Instructions
+##  Search Implementation Summary
+- Full-text search implemented on:
+  - Customer Name  
+  - Phone Number  
+- Case-insensitive matching  
+- Search works in combination with filters, sorting & pagination  
+- Optimized using O(n) filtering on pre-loaded dataset  
 
-### Backend
+---
+
+##  Filter Implementation Summary
+Supports multi-select and range filters:
+
+- Customer Region  
+- Gender  
+- Age Range  
+- Product Category  
+- Tags  
+- Payment Method  
+- Date Range  
+
+Filter behaviour:
+- Works independently or in combination  
+- Maintains state alongside search & sorting  
+- Handles conflicting filters gracefully (returns empty dataset)  
+- Tag filtering supports comma-separated tags  
+
+---
+
+##  Sorting Implementation Summary
+Sorting available on:
+- Date (Newest First / Oldest First)  
+- Quantity  
+- Customer Name (A–Z / Z–A)
+
+Sorting:
+- Applied after filtering & search  
+- Stable sort with predictable order  
+
+---
+
+##  Pagination Implementation Summary
+- Page size: **10 items per page**  
+- Next / Previous navigation supported  
+- Returns:
+  - totalItems  
+  - totalPages  
+  - currentPage  
+  - hasNextPage  
+  - hasPrevPage  
+
+Pagination respects active filters, search, and sorting.
+
+---
+
+##  Setup Instructions
+
+### **1️ Clone Repo**
+```bash
+git clone https://github.com/USERNAME/truestate-retail-system.git
+cd truestate-retail-system
+```
+
+---
+
+## **Backend Setup**
 ```bash
 cd backend
 npm install
-
-# IMPORTANT: replace src/data/sales.json with JSON converted from the official CSV dataset.
-# A small sample file is provided for local testing.
-
 npm run dev
-# runs on http://localhost:5000
 ```
 
-### Frontend
+Backend runs on:
+```
+http://localhost:5000
+```
+
+---
+
+## **Frontend Setup**
 ```bash
 cd frontend
 npm install
-
-# set backend URL if deployed:
-# create .env file with:
-# VITE_API_BASE_URL=http://localhost:5000
-
 npm run dev
-# runs on http://localhost:5173
 ```
-"# truestate-retail-system" 
-"# truestate-retail-system" 
+
+Create `.env` file:
+```
+VITE_API_URL=http://localhost:5000
+```
+
+Frontend runs on:
+```
+http://localhost:5173
+```
+
+---
+
+##  Project Structure
+
+```
+root
+├── backend/
+│   └── src/controllers
+│   └── src/services
+│   └── src/routes
+│   └── src/utils
+│   └── src/index.js
+│
+├── frontend/
+│   └── src/components
+│   └── src/services
+│   └── src/hooks
+│   └── src/utils
+│   └── src/styles
+│   └── main.jsx / App.jsx
+│
+└── docs/architecture.md
+```
+
+---
+
+##  Edge Case Handling
+- No results → Shows “No results found”
+- Conflicting filters → Returns empty dataset safely
+- Invalid numeric ranges → Sanitized before filter evaluation
+- Missing optional fields → Default fallbacks used
+- Large filter combinations → Efficient in-memory processing
+
+---
+
+##  Assignment Compliance
+- Fully modular architecture  
+- Clean, readable, maintainable code  
+- Strict separation of frontend & backend  
+- No autogenerated code  
+- Matches structural design guidelines  
+
+---
+
+##  Live Deployments
+**Frontend:** https://truestatefrontend.netlify.app/  
+**Backend:** https://retail-sales-management-v94x.onrender.com/api/sales
+
+---
+
+## Author
+**Md Kaif**
