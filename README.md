@@ -8,7 +8,7 @@ Frontend and backend are clearly separated with a clean, modular architecture.
 ## 2. Tech Stack
 - Backend: Node.js, Express
 - Frontend: React (Vite)
-- Data: JSON dataset converted from provided CSV
+- Data: JSON dataset converted from provided CSV(some of these)
 
 ## 3. Search Implementation Summary
 - Full-text search on Customer Name and Phone Number.
